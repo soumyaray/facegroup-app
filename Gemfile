@@ -9,16 +9,17 @@ gem 'json'
 gem 'econfig'
 gem 'rake'
 
-# gem 'roar'
-# gem 'multi_json'
-# gem 'dry-monads'
+gem 'http'
+
+gem 'roar'
+gem 'multi_json'
+gem 'dry-monads'
+gem 'dry-validation'
 # gem 'dry-container'
 # gem 'dry-transaction'
 
 group :development do
   gem 'rerun'
-  gem 'guard'
-  gem 'guard-livereload'
 
   gem 'flog'
   gem 'flay'

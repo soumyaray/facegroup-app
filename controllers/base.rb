@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'http'
 
 configure :development do
   def reload!
@@ -24,6 +25,8 @@ class Groupster < Sinatra::Base
   end
 
   get '/?' do
+    @data = GetAllGroups.call
+
     slim :home
   end
 end

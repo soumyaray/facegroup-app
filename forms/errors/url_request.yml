@@ -1,0 +1,3 @@
+en:
+  errors:
+    group_url: 'You must provide an HTTPS URL address for the group'
