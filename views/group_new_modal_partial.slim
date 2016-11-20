@@ -1,0 +1,22 @@
+div id="newGroupModal" class="modal fade" role="dialog"
+  div class="modal-dialog"
+    div class="modal-content"
+      div class="modal-header"
+        h4 New Group
+      div class="modal-body"
+        form role="form" action="/group" method='post' id='new-group-form'
+          div class="form-group"
+            label for='fb_group_url_input' Facebook Group URL:
+            input{ 
+              type='text' name='group_url'
+              id='fb_group_url_input' class="form-control"
+              placeholder="e.g.: https://www.facebook.com/groups/ISS.SOAD"
+            }
+          button{ 
+            type='submit' id='group-form-submit' class='submit' 
+            value='submit' class="btn btn-success" 
+          } Create
+          
+          button{ 
+            type="button" class="btn btn-default" data-dismiss="modal" 
+          } Cancel

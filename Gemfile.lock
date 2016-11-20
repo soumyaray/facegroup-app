@@ -21,8 +21,14 @@ GEM
       dry-container (~> 0.2, >= 0.2.6)
       dry-core (~> 0.1)
       dry-equalizer (~> 0.2)
+    dry-matcher (0.5.0)
     dry-monads (0.2.1)
       dry-equalizer
+    dry-transaction (0.8.0)
+      dry-container (>= 0.2.8)
+      dry-matcher (>= 0.5.0)
+      dry-monads (>= 0.0.1)
+      wisper (>= 1.6.0)
     dry-types (0.9.2)
       concurrent-ruby (~> 1.0)
       dry-configurable (~> 0.1)
@@ -75,6 +81,8 @@ GEM
     public_suffix (2.0.4)
     puma (3.6.0)
     rack (1.6.5)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -125,12 +133,15 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
+    wisper (1.6.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  dry-container
   dry-monads
+  dry-transaction
   dry-validation
   econfig
   flay
@@ -141,6 +152,7 @@ DEPENDENCIES
   minitest-rg
   multi_json
   puma
+  rack-flash3
   rack-test
   rake
   rerun

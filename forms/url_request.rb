@@ -1,4 +1,4 @@
-require 'dry-validation'
+# frozen_string_literal: true
 
 UrlRequest = Dry::Validation.Form do
   required(:group_url).filled(format?: %r{https\:\/\/})

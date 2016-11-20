@@ -4,10 +4,11 @@ ruby '2.3.1'
 
 gem 'puma'
 gem 'sinatra'
-gem 'slim'
 gem 'json'
 gem 'econfig'
 gem 'rake'
+gem 'slim'
+gem 'rack-flash3'
 
 gem 'http'
 
@@ -15,8 +16,8 @@ gem 'roar'
 gem 'multi_json'
 gem 'dry-monads'
 gem 'dry-validation'
-# gem 'dry-container'
-# gem 'dry-transaction'
+gem 'dry-container'
+gem 'dry-transaction'
 
 group :development do
   gem 'rerun'

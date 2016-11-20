@@ -1,35 +1,34 @@
 # frozen_string_literal: true
 
-# GroupAPI web service
+# Groupster web application
 class Groupster < Sinatra::Base
-  get '/group/?' do
-    @data = GetAllGroups.call
+  # Home page: show list of all groups
+  get '/?' do
+    result = GetAllGroups.call
+    if result.success?
+      @data = result.value
+    else
+      flash[:error] = result.value.message
+    end
 
     slim :group
   end
 
-  get '/group/:id/?' do
-    # result = FindGroup.call(params)
-    #
-    # if result.success?
-    #   GroupRepresenter.new(result.value).to_json
-    # else
-    #   ErrorRepresenter.new(result.value).to_status_response
-    # end
-  end
-
-  # Body args (JSON) e.g.: {"url": "http://facebook.com/groups/group_name"}
+  # Add a new Facebook group to our systems
   post '/group/?' do
     url_request = UrlRequest.call(params)
     result = CreateNewGroup.call(url_request)
 
     if result.success?
-      puts "SUCCESS: #{result.value}"
+      flash[:notice] = 'Group successfully added'
     else
-      error_presenter = ErrorPresenter.new(result.value)
-      puts "ERROR: #{error_presenter.to_interface_message}"
+      flash[:error] = result.value.message
     end
 
-    redirect '/group'
+    redirect '/'
+  end
+
+  get '/group/:id/?' do
+    # TODO: get postings and information from a single group
   end
 end

@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require 'http'
-
 configure :development do
   def reload!
     # Tux reloading: https://github.com/cldwalker/tux/issues/3
@@ -8,25 +6,22 @@ configure :development do
   end
 end
 
-# configure based on environment
+# configure web application
 class Groupster < Sinatra::Base
   extend Econfig::Shortcut
-
-  set :views, File.expand_path('../../views', __FILE__)
-  set :public_dir, File.expand_path('../../public', __FILE__)
 
   configure do
     Econfig.env = settings.environment.to_s
     Econfig.root = File.expand_path('..', settings.root)
   end
 
+  use Rack::Session::Cookie, secret: Groupster.config.SECRET
+  use Rack::Flash
+
+  set :views, File.expand_path('../../views', __FILE__)
+  set :public_dir, File.expand_path('../../public', __FILE__)
+
   after do
     content_type 'text/html'
-  end
-
-  get '/?' do
-    @data = GetAllGroups.call
-
-    slim :home
   end
 end

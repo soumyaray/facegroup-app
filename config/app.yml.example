@@ -1,0 +1,12 @@
+---
+development:
+  FACEGROUP_API: 'http://localhost:9292/api/v0.1'
+  SECRET: 'some secret'
+
+test:
+  FACEGROUP_API: 'http://localhost:9292/api/v0.1'
+  SECRET: 'some secret'
+
+production:
+  FACEGROUP_API: 'https://my-server.com/api/v0.1'
+  SECRET: 'some secret'
