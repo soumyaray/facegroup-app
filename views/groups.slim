@@ -1,0 +1,24 @@
+div class="row" style="vertical-align: bottom;"
+  div class="col-xs-9"
+    h3 All Groups
+  div class="col-xs-3"
+    button{ type="button" 
+      class="btn btn-success" 
+      data-toggle="modal" 
+      data-target="#newGroupModal" 
+    } + New Group 
+    
+table class="table"
+  thead
+    tr
+      th Group Name
+      th Facebook Link
+  tbody
+    - @data&.groups&.each do |group|
+      tr
+        td 
+          a href="/groups/#{group[:id]}" #{group[:name]}
+        td 
+          a href="#{group[:fb_url]}" #{group[:fb_url]}
+
+include :group_new_modal_partial
