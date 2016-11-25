@@ -30,10 +30,10 @@ class Groupster < Sinatra::Base
   end
 
   get '/groups/:id/?' do
-    # TODO: get postings and information from a single group
     group_details = GetGroupDetails.call(params)
     if group_details.success?
-      @group = group_details.value
+      group_postings = group_details.value
+      @group = GroupDetailsView.new(group_postings)
       slim :group
     else
       flash[:error] = 'Could not find that group -- we are investigating!'
