@@ -15,7 +15,7 @@ class GroupDetailsView
   private
 
   def format_all_postings(postings)
-    new_postings = postings.map do |posting|
+    new_postings = postings&.map do |posting|
       formatted_posting(posting)
     end
   end
