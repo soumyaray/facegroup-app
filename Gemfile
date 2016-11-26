@@ -29,11 +29,14 @@ end
 group :test do
   gem 'minitest'
   gem 'minitest-rg'
-
   gem 'rack-test'
 
   gem 'vcr'
   gem 'webmock'
+
+  gem 'watir-webdriver'
+  gem 'headless'
+  gem 'page-object'
 end
 
 group :development, :production do
