@@ -34,7 +34,7 @@ class Groupster < Sinatra::Base
     if group_details.success?
       group_postings = group_details.value
       @group = GroupDetailsView.new(group_postings)
-      slim :group
+      slim :group_details
     else
       flash[:error] = 'Could not find that group -- we are investigating!'
       redirect '/'

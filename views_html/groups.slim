@@ -2,7 +2,9 @@ div class="row" style="vertical-align: bottom;"
   div class="col-xs-9"
     h3 All Groups
   div class="col-xs-3"
-    button{ type="button" 
+    button{ 
+      name="new_group"
+      type="button" 
       class="btn btn-success" 
       data-toggle="modal" 
       data-target="#newGroupModal" 
@@ -15,10 +17,12 @@ table class="table"
       th Facebook Link
   tbody
     - @data&.groups&.each do |group|
-      tr
+      tr class="groups_row"
         td 
-          a href="/groups/#{group[:id]}" #{group[:name]}
+          span class="group_name"
+            a href="/groups/#{group[:id]}" #{group[:name]}
         td 
-          a href="#{group[:fb_url]}" #{group[:fb_url]}
+          span class="group_url"
+            a href="#{group[:fb_url]}" #{group[:fb_url]}
 
 include :group_new_modal_partial

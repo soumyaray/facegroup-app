@@ -3,32 +3,25 @@ ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
 require 'minitest/rg'
-require 'rack/test'
-require 'vcr'
-require 'webmock'
 
-require 'watir-webdriver'
+require 'watir'
 require 'headless'
 require 'page-object'
 
 require './init.rb'
 
-include Rack::Test::Methods
-
-def app
-  Groupster
-end
-
-FIXTURES_FOLDER = 'spec/fixtures'
-CASSETTES_FOLDER = "#{FIXTURES_FOLDER}/cassettes"
-EMPTY_CASSETTE = 'empty_api'
-DATA_CASSETTE = 'data_api'
-
-VCR.configure do |c|
-  c.cassette_library_dir = CASSETTES_FOLDER
-  c.hook_into :webmock
-end
-
-HAPPY_GROUP_URL = 'https://www.facebook.com/groups/ISS.SOAD'
-SAD_GROUP_URL = 'https://www.facebook.com/groups/whatisthisidonteven'
+EXISTS_GROUP_URL = 'https://www.facebook.com/groups/ISS.SOAD'
+NEW_GROUP_URL = 'https://www.facebook.com/groups/nthu.analytics'
+INVALID_GROUP_URL = 'https://www.facebook.com/groups/that_does_not_exist404'
 BAD_GROUP_URL = 'htt://www.facebook'
+
+HOST = 'http://localhost:9000/'
+
+# Helper methods
+def homepage
+  HOST
+end
+
+def group_details_page(id)
+  "#{HOST}/groups/#{id}"
+end
