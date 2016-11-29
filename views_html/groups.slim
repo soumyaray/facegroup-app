@@ -10,19 +10,19 @@ div class="row" style="vertical-align: bottom;"
       data-target="#newGroupModal" 
     } + New Group 
     
-table class="table"
+table class="table" id="groups_table"
   thead
     tr
       th Group Name
       th Facebook Link
   tbody
-    - @data&.groups&.each do |group|
-      tr class="groups_row"
+    - @data&.groups&.each.with_index do |group, index|
+      tr class="groups_row" id="group[#{index}].row"
         td 
-          span class="group_name"
-            a href="/groups/#{group[:id]}" #{group[:name]}
+          span class="group_name" id="group[#{index}].name"
+            a href="/groups/#{group[:id]}" id="group[#{index}].link" #{group[:name]}
         td 
-          span class="group_url"
-            a href="#{group[:fb_url]}" #{group[:fb_url]}
+          span class="fb_group_url" id="fb_group_url_#{index}"
+            a href="#{group[:fb_url]}" id="group[#{index}].fb_link" #{group[:fb_url]}
 
 include :group_new_modal_partial

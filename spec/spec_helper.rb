@@ -9,6 +9,7 @@ require 'headless'
 require 'page-object'
 
 require './init.rb'
+require_relative 'pages/init.rb'
 
 EXISTS_GROUP_URL = 'https://www.facebook.com/groups/ISS.SOAD'
 NEW_GROUP_URL = 'https://www.facebook.com/groups/nthu.analytics'
