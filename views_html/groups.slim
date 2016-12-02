@@ -1,7 +1,7 @@
-div class="row" style="vertical-align: bottom;"
-  div class="col-xs-9"
+.row style="vertical-align: bottom;"
+  .col-xs-9
     h3 All Groups
-  div class="col-xs-3"
+  .col-xs-3
     button{ 
       name="new_group"
       type="button" 
@@ -16,7 +16,7 @@ table class="table" id="groups_table"
       th Group Name
       th Facebook Link
   tbody
-    - @data&.groups&.each.with_index do |group, index|
+    - @data&.groups&.each&.with_index do |group, index|
       tr class="groups_row" id="group[#{index}].row"
         td 
           span class="group_name" id="group[#{index}].name"
