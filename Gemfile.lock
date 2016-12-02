@@ -158,6 +158,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  concurrent-ruby (~> 1.0)
   dry-container
   dry-monads
   dry-transaction

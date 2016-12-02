@@ -7,7 +7,7 @@ class Groupster < Sinatra::Base
     result = GetAllGroups.call
     if result.success?
       @data = result.value
-      puts @data
+      # puts @data
     else
       flash[:error] = result.value.message
     end

@@ -18,6 +18,7 @@ gem 'dry-monads'
 gem 'dry-validation'
 gem 'dry-container'
 gem 'dry-transaction'
+gem 'concurrent-ruby', '~> 1.0'
 
 group :development do
   gem 'rerun'
