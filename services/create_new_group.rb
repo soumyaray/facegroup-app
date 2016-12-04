@@ -36,7 +36,7 @@ class CreateNewGroup
   register :return_api_result, lambda { |http_result|
     data = http_result.body.to_s
     if http_result.status == 200
-      Right(GroupRepresenter.new(Group.new).from_json(data))
+      Right(GroupRepresenter.new(GroupDetails.new).from_json(data))
     else
       message = ErrorFlattener.new(
         ApiErrorRepresenter.new(ApiError.new).from_json(data)

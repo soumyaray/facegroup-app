@@ -1,21 +1,24 @@
 # frozen_string_literal: true
-require_relative 'posting'
+require_relative 'posting_view'
 
 class GroupDetailsView
   SHORT_STR_SIZE = 80
   FB_ATTACHED_URL_PREFIX = 'https://www.facebook.com/l.php?u='
   PLACEHOLDER_IMG_URL = 'http://placehold.it/100x100?text=G'
 
-  attr_reader :group_name, :group_url, :postings
+  attr_reader :id, :name, :fb_url, :postings
 
   def initialize(group_details)
+    @id = group_details.id
+    @name = group_details.name
+    @fb_url = group_details.fb_url
     @postings = format_all_postings(group_details.postings)
   end
 
   private
 
   def format_all_postings(postings)
-    new_postings = postings&.map do |posting|
+    postings&.map do |posting|
       formatted_posting(posting)
     end
   end
@@ -27,12 +30,9 @@ class GroupDetailsView
     attachment_media_url = posting.attachment_media_url || PLACEHOLDER_IMG_URL
 
     PostingView.new(
-      id = posting.id, created_time = posting.created_time,
-      main_description = short_description,
-      attachment_title = posting.attachment_title,
-      attachment_description = short_attachment,
-      attachment_url = original_attached_url,
-      attachment_media_url = attachment_media_url
+      posting.id, posting.created_time, short_description,
+      posting.attachment_title, short_attachment,
+      original_attached_url, attachment_media_url
     )
   end
 

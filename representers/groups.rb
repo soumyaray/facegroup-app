@@ -5,5 +5,5 @@ require_relative 'group'
 class GroupsRepresenter < Roar::Decorator
   include Roar::JSON
 
-  collection :groups, extend: GroupRepresenter, class: Group
+  collection :groups, extend: GroupRepresenter, class: GroupDetails
 end

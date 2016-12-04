@@ -5,6 +5,8 @@ require_relative 'posting'
 class GroupDetailsRepresenter < Roar::Decorator
   include Roar::JSON
 
-  property :group_id
+  property :id
+  property :name
+  property :fb_url
   collection :postings, extend: PostingRepresenter, class: Posting
 end

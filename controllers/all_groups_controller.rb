@@ -4,15 +4,14 @@
 class Groupster < Sinatra::Base
   # Home page: show list of all groups
   get '/?' do
-    result = GetAllGroups.call
+    result = GetAllGroups.call(params)
     if result.success?
-      @data = result.value
-      # puts @data
+      @data = AllGroupsView.new(result.value)
     else
       flash[:error] = result.value.message
     end
 
-    slim :groups
+    slim :all_groups
   end
 
   # Add a new Facebook group to our systems

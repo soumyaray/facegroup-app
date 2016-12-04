@@ -5,7 +5,9 @@ require_relative 'posting'
 class PostingsSearchResultsRepresenter < Roar::Decorator
   include Roar::JSON
 
-  property :search_terms_used
-  property :group_id
+  property :id
+  property :name
+  property :fb_url
   collection :postings, extend: PostingRepresenter, class: Posting
+  property :search_terms_used
 end
