@@ -19,7 +19,7 @@ describe 'Homepage' do
 
     it '(HAPPY) should see website features' do
       # GIVEN: user goes to the home page
-      visit GroupsPage do |page|
+      visit AllGroupsPage do |page|
         # THEN: user should see correct title, header, 'next page' button
         page.title.must_include 'Groupster'
         page.heading.must_include 'Groupster'
@@ -30,7 +30,7 @@ describe 'Homepage' do
 
     it '(HAPPY) should see content' do
       # GIVEN: user goes to the homepage
-      visit GroupsPage do |page|
+      visit AllGroupsPage do |page|
         # THEN: user should see a row with group information and links
         page.groups_count.must_be :>=, 1
         page.first_row.link_element.text.must_include 'Service'
@@ -41,7 +41,7 @@ describe 'Homepage' do
 
     it '(HAPPY) should be able open the new group modal' do
       # GIVEN: on the homepage
-      visit GroupsPage do |page|
+      visit AllGroupsPage do |page|
         # WHEN: click on 'new group'
         page.new_group
 
@@ -58,7 +58,7 @@ describe 'Homepage' do
 
     it '(HAPPY) should be able to add a real group' do
       # GIVEN: on the homepage
-      visit GroupsPage do |page|
+      visit AllGroupsPage do |page|
         # WHEN: add a valid group url
         page.add_new_group_url(NEW_GROUP_URL)
 
@@ -76,7 +76,7 @@ describe 'Homepage' do
 
     it '(SAD) should alert user if adding existing group' do
       # GIVEN: on the homepage
-      visit GroupsPage do |page|
+      visit AllGroupsPage do |page|
         # WHEN: add an existing group url
         page.add_new_group_url(EXISTS_GROUP_URL)
 
@@ -88,7 +88,7 @@ describe 'Homepage' do
 
     it '(SAD) should alert user if incorrect URL given' do
       # GIVEN: on the homepage
-      visit GroupsPage do |page|
+      visit AllGroupsPage do |page|
         # WHEN: add an invalid group url
         page.add_new_group_url(INVALID_GROUP_URL)
 
@@ -100,7 +100,7 @@ describe 'Homepage' do
 
     it '(SAD) should alert user if unresolvable URL given' do
       # GIVEN: on the homepage
-      visit GroupsPage do |page|
+      visit AllGroupsPage do |page|
         # WHEN: add an badly formed group url
         page.add_new_group_url(INVALID_GROUP_URL)
 

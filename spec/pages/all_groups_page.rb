@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Page object for all groups view (homepage)
-class GroupsPage
+class AllGroupsPage
   include PageObject
 
   page_url 'http://localhost:9000/'
