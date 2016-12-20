@@ -20,7 +20,7 @@ class Groupster < Sinatra::Base
     result = CreateNewGroup.call(url_request)
 
     if result.success?
-      flash[:notice] = 'Group successfully added'
+      flash[:notice] = 'Importing Facebook Group: please check back later'
     else
       flash[:error] = result.value.message
     end
