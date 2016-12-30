@@ -5,7 +5,7 @@ class GetGroupUpdates
   extend Dry::Monads::Either::Mixin
 
   def self.call(group_id)
-    result = HTTP.get("#{Groupster.config.FACEGROUP_API}/group/#{group_id}/news")
+    result = HTTP.get("#{Groupster.api_ver_url}/group/#{group_id}/news")
     Right(PostingsSearchResultsRepresenter.new(PostingsSearchResults.new)
                                           .from_json(result.body.to_s))
   rescue

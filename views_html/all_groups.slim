@@ -1,21 +1,57 @@
 .container
   .row style="vertical-align: bottom;"
     .col-xs-2
-      a{ 
+      a{
         href="/?action=update"
-        role="button" 
+        role="button"
         class="btn btn-link"
       } Check for updates
     .col-xs-6
     .col-xs-2
-      button{ 
+      button{
         name="new_group"
-        type="button" 
-        class="btn btn-success" 
-        data-toggle="modal" 
-        data-target="#newGroupModal" 
-      } + New Group 
-  
+        type="button"
+        class="btn btn-success"
+        data-toggle="modal"
+        data-target="#newGroupModal"
+      } + New Group
+
+- if @data&.channel_id
+  .progress
+    .progress-bar.progress-bar-success.progress-bar-striped.active[
+      role="progressbar" aria-valuenow="10" aria-valuemin="0"
+      aria-valuemax="100" style="width:0%"]
+
+  script src = "#{@data.api_url}/faye.js"
+  javascript:
+    var channel = "#{@data.channel_id}";
+    var client = new Faye.Client("#{@data.api_url}/faye");
+    var bar = document.getElementsByClassName("progress-bar")[0];
+    var reg = /\:(\d+)%/
+    client.subscribe('/' + channel, function(message) {
+      var progress = bar.getAttribute("style")
+      var currentProgress = reg.exec(progress)[1]
+      
+      if (isNaN(message)) {
+        bar.setAttribute("style", "width:100%")
+        bar.setAttribute("class", "progress-bar progress-bar-danger progress-bar-striped")
+        bar.innerHTML = message
+      } else {
+        if (parseInt(message) > parseInt(currentProgress)) {
+          bar.setAttribute("aria-valuenow", message)
+          bar.setAttribute("style", "width:"+message+"%")
+          bar.innerHTML = message+"%"
+
+          if (message == "100") {
+            setTimeout(function () {
+              window.location = window.location.href.split('?')[0]
+            }, 2000);
+          }
+        }
+      }
+    });
+
+
 table class="table" id="groups_table"
   thead
     tr
@@ -24,11 +60,11 @@ table class="table" id="groups_table"
   tbody
     - @data&.groups&.each&.with_index do |group, index|
       tr class="groups_row" id="group[#{index}].row"
-        td 
+        td
           span class="group_name" id="group[#{index}].name"
             a href="/groups/#{group.id}" id="group[#{index}].link" #{group.name}
           span class="group_updates" id="group[#{index}].updates" &nbsp #{group.updates}
-        td 
+        td
           span class="fb_group_url" id="fb_group_url_#{index}"
             a href="#{group.fb_url}" id="group[#{index}].fb_link" #{group.fb_url}
 

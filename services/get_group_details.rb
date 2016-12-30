@@ -5,7 +5,7 @@ class GetGroupDetails
   extend Dry::Monads::Either::Mixin
 
   def self.call(params)
-    result = HTTP.get("#{Groupster.config.FACEGROUP_API}/group/#{params[:id]}/posting")
+    result = HTTP.get("#{Groupster.api_ver_url}/group/#{params[:id]}/posting")
     Right(GroupDetailsRepresenter.new(GroupDetails.new)
                                  .from_json(result.body.to_s))
   rescue

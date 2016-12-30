@@ -14,10 +14,11 @@ class GetAllGroups
 
   register :get_all_groups, lambda { |params|
     begin
-      results = HTTP.get("#{Groupster.config.FACEGROUP_API}/group")
+      results = HTTP.get("#{Groupster.api_ver_url}/group")
       Right(groups: GroupsRepresenter.new(Groups.new).from_json(results.body),
             params: params)
     rescue
+      puts "URL: #{Groupster.api_ver_url}"
       Left(Error.new('Our servers failed - we are investigating!'))
     end
   }

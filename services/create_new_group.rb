@@ -26,7 +26,7 @@ class CreateNewGroup
 
   register :call_api_to_load_group, lambda { |url|
     begin
-      Right(HTTP.post("#{Groupster.config.FACEGROUP_API}/group",
+      Right(HTTP.post("#{Groupster.api_ver_url}/group",
                       json: { url: url }))
     rescue
       Left(Error.new('Our servers failed - we are investigating!'))
@@ -36,7 +36,7 @@ class CreateNewGroup
   register :return_api_result, lambda { |http_result|
     data = http_result.body.to_s
     if http_result.status == 202
-      Right(GroupRepresenter.new(GroupDetails.new).from_json(data))
+      Right(WSChannelRepresenter.new(WSChannel.new).from_json(data))
     else
       message = ErrorFlattener.new(
         ApiErrorRepresenter.new(ApiError.new).from_json(data)

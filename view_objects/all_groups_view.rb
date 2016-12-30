@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 class AllGroupsView
-  attr_reader :groups
+  attr_reader :groups, :channel_id, :api_url
 
-  def initialize(all_groups)
+  def initialize(all_groups, channel_id=nil, api_url=nil)
     @groups = all_groups.groups.map { |group| GroupDescriptionView.new(group) }
+    @channel_id = channel_id
+    @api_url = api_url
   end
 end
 
